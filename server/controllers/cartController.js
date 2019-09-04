@@ -7,7 +7,7 @@ const addToCart = (req, res) => {
     const index = user.cart.findIndex(swag => swag.id == id)
 
     if(index === -1) {
-        const selectedSwag = sawg.find(swag => swag.id == id)
+        const selectedSwag = swag.find(swag => swag.id == id)
 
         user.cart.push(selectedSwag)
         user.total += selectedSwag.price
