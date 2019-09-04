@@ -6,6 +6,7 @@ const checkForSession = require('./middleware/checkForSession')
 const swagCtrl = require('./controllers/swagController')
 const authCtrl = require('./controllers/authController')
 const cartCtrl = require('./controllers/cartController')
+const searchCtrl = require('./controllers/searchController')
 
 const {SESSION_SECRET, SERVER_PORT} = process.env
 
@@ -19,6 +20,9 @@ app.use(session({
     secret: SESSION_SECRET
 }))
 
+
+app.use(express.static(`${__dirname}/../build`))
+
 app.use(checkForSession.checkUser)
 
 app.get('/api/swag', swagCtrl.getSwag)
@@ -31,6 +35,8 @@ app.get('/api/user', authCtrl.getUser)
 app.post('/api/cart/checkout', cartCtrl.checkout)
 app.post('/api/cart/:id', cartCtrl.addToCart)
 app.delete('/api/cart/:id', cartCtrl.deleteFromCart)
+
+app.get('/api/search', searchCtrl.search)
 
 
 app.listen(SERVER_PORT, () => {
