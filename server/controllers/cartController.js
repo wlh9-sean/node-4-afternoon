@@ -1,7 +1,7 @@
-const cart = require('../models/swag')
+const swag = require('../models/swag')
 
 const addToCart = (req, res) => {
-    const db = req.app.get('db')
+    const {id} = req.params
     let {user} = req.session
 
     const index = user.cart.findIndex(swag => swag.id == id)
@@ -13,7 +13,7 @@ const addToCart = (req, res) => {
         user.total += selectedSwag.price
     }
     res.status(200).send(user)
-},
+}
 
 const deleteFromCart = (req, res) => {
     const {id} = req.params
@@ -28,7 +28,7 @@ const deleteFromCart = (req, res) => {
     }
 
     res.status(200).send(user)
-},
+}
 
 const checkout = (req, res) => {
     const {user} = req.session

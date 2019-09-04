@@ -4,6 +4,7 @@ let id = 1
 
 const login = (req, res) => {
     const {username, password} = req.body
+    const {session} = req
 
     let currentUser = users.filter(user => {
         if(user.username === username){
